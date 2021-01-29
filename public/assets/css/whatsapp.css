@@ -1,0 +1,20 @@
+.float{
+	position:fixed;
+	width:50px;
+	height:50px;
+	bottom:50px;
+	right:50px;
+	background: url("../img/botonwhatsapp.png");	
+	border-radius:0px;
+	text-align:center;  
+    z-index:100;
+}
+.float:hover {
+	display:block;
+    margin:auto;	
+    background: url("../img/botonwhatsapp.png");
+}
+
+.my-float{
+	margin-top:16px;
+}
