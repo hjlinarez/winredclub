@@ -1,4 +1,5 @@
 <?php
+echo "hola desde el index"; die(0);
 /**
  * Laravel - A PHP Framework For Web Artisans
  *
