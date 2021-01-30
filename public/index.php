@@ -33,7 +33,7 @@ define('LARAVEL_START', microtime(true));
 | the responses back to the browser and delight our users.
 |
 */
-echo "hola desde el index2"; die(0);
+//echo "hola desde el index2"; die(0);
 $app = require_once __DIR__.'/../bootstrap/app.php';
 
 /*
