@@ -7,6 +7,14 @@ use Illuminate\Http\Request;
 class JugadorController extends Controller
 {
     //
+    function show()
+    {
+         $datos = \DB::table('jugador')->get();
+        return view('admin.jugadores')->with('datos', $datos);
+    }
+
+
+
     public function datos_jugador($usuario)
     {
         $datos = \DB::table('jugador')                            

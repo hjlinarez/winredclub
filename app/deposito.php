@@ -8,5 +8,8 @@ class deposito extends Model
 {
     public $table = 'deposito';
 
-
+    public function jugador()
+    {
+        return $this->belongsTo('App\jugador');
+    }
 }

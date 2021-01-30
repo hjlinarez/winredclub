@@ -8,4 +8,10 @@ class jugador extends Model
 {
     //
     public $table = 'jugador';
+
+
+    public function depositos()
+    {
+        return $this->hasMany('App\deposito');
+    }
 }
