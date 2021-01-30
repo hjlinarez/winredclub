@@ -19,8 +19,8 @@ define('LARAVEL_START', microtime(true));
 | loading any of our classes later on. It feels great to relax.
 |
 */
-
-//require __DIR__.'/../vendor/autoload.php';
+echo __DIR__; die(0);
+require __DIR__.'/../vendor/autoload.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -33,7 +33,7 @@ define('LARAVEL_START', microtime(true));
 | the responses back to the browser and delight our users.
 |
 */
-//echo "hola desde el index2"; die(0);
+
 $app = require_once __DIR__.'/../bootstrap/app.php';
 
 /*
