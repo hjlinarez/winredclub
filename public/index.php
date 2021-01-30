@@ -1,5 +1,5 @@
 <?php
-echo "hola desde el index"; die(0);
+
 /**
  * Laravel - A PHP Framework For Web Artisans
  *
@@ -48,12 +48,14 @@ $app = require_once __DIR__.'/../bootstrap/app.php';
 | and wonderful application we have prepared for them.
 |
 */
-
+echo "hola desde el index2"; die(0);
 $kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
 
 $response = $kernel->handle(
     $request = Illuminate\Http\Request::capture()
 );
+
+
 
 $response->send();
 
