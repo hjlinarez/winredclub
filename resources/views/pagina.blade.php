@@ -1784,13 +1784,13 @@
                 
                 if (resp.status == 200)
                 {
-                  alert("then");
-                    swal(resp.data.msg, "Presione el Boton Ok!", "success").then((value)=> {$("#modalRegistrarCuenta").modal('hide');});  
+                 
+                  swal("Registro Insertado", "Presione el Boton Ok!", "success").then((value)=> {$("#modalRegistrarCuenta").modal('hide');});  
                 }
                 else 
                 {
-                  alert("sino");
-                    swal(resp.data.msg, "Presione el Boton Ok!", "error").then((value)=> {});  
+                 
+                    swal("No se pudo completar el registro, verifique la informacion", "Presione el Boton Ok!", "error").then((value)=> {});  
                     
                 }
 
@@ -1799,9 +1799,9 @@
 
             })
             .catch(function (error) {     
-                console.log(error)   
-                alert("error");        ;
-                swal(error.response.data.msg, "Presione el Boton Ok!", "error").then((value)=> {});  
+                
+                
+                swal("Error", "Presione el Boton Ok!", "error").then((value)=> {});  
             });    
         }
 
@@ -1865,7 +1865,7 @@
                 // handle success
                 if (resp.status == 200)
                 {
-                  swal(resp.data.msg, "Presione el Boton Ok!", "success").then((value)=> {$("#modalDeposito").modal('hide');});
+                  swal("Error", "Presione el Boton Ok!", "success").then((value)=> {$("#modalDeposito").modal('hide');});
                 }
                 else 
                 {
