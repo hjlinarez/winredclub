@@ -46,6 +46,8 @@ class JugadorController extends Controller
             <p>movil_wp'.$movil_wp.'</p>
 
             ';
+
+            
         //validacion de email en jugador
         $jugador = \DB::table('jugador')->where('email','=', $email)->get();
         if (count($jugador) > 0)
