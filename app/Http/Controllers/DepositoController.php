@@ -58,7 +58,7 @@ class DepositoController extends Controller
         $email          = $request["email"];        
         $idmoneda       = $request["idmoneda"];
         $monto          = $request["monto"];
-        $referencia          = $request["referencia"];
+        $referencia     = $request["referencia"];
 
         
 
