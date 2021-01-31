@@ -1781,7 +1781,7 @@
                         usuario: usuario
                     })            
             .then(function (resp) {
-                
+                alert(resp.status);
                 if (resp.status == 200)
                 {
                  
