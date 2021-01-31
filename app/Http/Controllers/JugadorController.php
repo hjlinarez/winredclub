@@ -60,7 +60,7 @@ class JugadorController extends Controller
         
            
 
-        \DB::table('jugador')->insert(
+        $registrado = \DB::table('jugador')->insert(
             [
                 'nombrecompleto'=>$nombrecompleto,
                 'usuario'=>$usuario, 
@@ -71,10 +71,20 @@ class JugadorController extends Controller
             ]
         );
 
-        return response()->json([
-            'status' => 'Registro Satisfactorio!',
-            'msg' => 'Los datos se han registrado satisfactoriamente!!!',
-        ],200);
+        if ($registrado)
+        {
+            return response()->json([
+                'status' => 'Registro Satisfactorio!',
+                'msg' => 'Los datos se han registrado satisfactoriamente!!!',
+            ],200);
+        }
+        else 
+        {
+            return response()->json([
+                'status' => 'Error en el registro!',
+                'msg' => 'No se pudo registrar la cuenta!!!',
+            ],202);
+        }
 
     }
 
