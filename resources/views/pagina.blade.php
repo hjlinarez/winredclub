@@ -1770,7 +1770,7 @@
                 });  
                 return false;                              
             }
-
+            alert("policia");
             axios.post('jugador',
                     {
                         nombrecompleto: nombrecompleto,
@@ -1808,12 +1808,12 @@
         function registrar_deposito(form)
         {
 
-            let usuario       = document["formulario_deposito"].usuario.value; 
+            let usuario     = document["formulario_deposito"].usuario.value; 
             let email       = document["formulario_deposito"].email.value;                        
             let idmoneda    = document["formulario_deposito"].idmoneda.value;
             let monto       = document["formulario_deposito"].monto.value;
-            let referencia       = document["formulario_deposito"].referencia.value;
-            alert("policia");
+            let referencia  = document["formulario_deposito"].referencia.value;
+            
             if (usuario.length === 0){
                 swal("Usuario es Invalido!", "Presione el Boton Ok!", "error").then((value)=> {
                     document.getElementById("usuario").focus();
