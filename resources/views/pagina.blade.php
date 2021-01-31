@@ -1770,7 +1770,7 @@
                 });  
                 return false;                              
             }
-            alert("policia");
+            
             axios.post('jugador',
                     {
                         nombrecompleto: nombrecompleto,
@@ -1784,10 +1784,12 @@
                 
                 if (resp.status == 200)
                 {
+                  alert("then");
                     swal(resp.data.msg, "Presione el Boton Ok!", "success").then((value)=> {$("#modalRegistrarCuenta").modal('hide');});  
                 }
                 else 
                 {
+                  alert("sino");
                     swal(resp.data.msg, "Presione el Boton Ok!", "error").then((value)=> {});  
                     
                 }
@@ -1797,7 +1799,8 @@
 
             })
             .catch(function (error) {     
-                console.log(error)           ;
+                console.log(error)   
+                alert("error");        ;
                 swal(error.response.data.msg, "Presione el Boton Ok!", "error").then((value)=> {});  
             });    
         }
