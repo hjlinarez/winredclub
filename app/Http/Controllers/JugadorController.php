@@ -45,7 +45,7 @@ class JugadorController extends Controller
             return response()->json([
                 'status' => 'Ocurrio un error!',
                 'msg' => 'El email ya se encuentra registrado!!!',
-            ],202);
+            ],210);
         }
 
         //validacion de usuario en jugador
@@ -55,12 +55,12 @@ class JugadorController extends Controller
             return response()->json([
                 'status' => 'Ocurrio un error!',
                 'msg' => 'El usuario ya se encuentra registrado!!!',
-            ],202);
+            ],211);
         }
         
            
 
-        $id = \DB::table('jugador')->insertGetId(
+        $id = \DB::table('jugador')->insert(
             [
                 'nombrecompleto'=>$nombrecompleto,
                 'usuario'=>$usuario, 
@@ -71,20 +71,12 @@ class JugadorController extends Controller
             ]
         );
 
-        if ($id > 0)
-        {
+      
             return response()->json([
                 'status' => 'Registro Satisfactorio!',
                 'msg' => 'Los datos se han registrado satisfactoriamente!!!',
             ],200);
-        }
-        else 
-        {
-            return response()->json([
-                'status' => 'Error en el registro!',
-                'msg' => 'No se pudo registrar la cuenta!!!',
-            ],202);
-        }
+       
 
     }
 
