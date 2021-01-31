@@ -60,7 +60,7 @@ class JugadorController extends Controller
         
            
 
-        $registrado = \DB::table('jugador')->insert(
+        $id = \DB::table('jugador')->insertGetId(
             [
                 'nombrecompleto'=>$nombrecompleto,
                 'usuario'=>$usuario, 
@@ -71,7 +71,7 @@ class JugadorController extends Controller
             ]
         );
 
-        if ($registrado)
+        if ($id > 0)
         {
             return response()->json([
                 'status' => 'Registro Satisfactorio!',
