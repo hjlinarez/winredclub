@@ -43,9 +43,9 @@ class JugadorController extends Controller
         if (count($jugador) > 0)
         {
             return response()->json([
-                'status' => 'Ocurrio un error!',
+                'status' => 200,
                 'msg' => 'El email ya se encuentra registrado!!!',
-            ],202);
+            ]);
         }
 
         //validacion de usuario en jugador
@@ -53,9 +53,9 @@ class JugadorController extends Controller
         if (count($jugador) > 0)
         {
             return response()->json([
-                'status' => 'Ocurrio un error!',
+                'status' => 200,
                 'msg' => 'El usuario ya se encuentra registrado!!!',
-            ],202);
+            ]);
         }
         
            
@@ -73,9 +73,9 @@ class JugadorController extends Controller
 
       
             return response()->json([
-                'status' => 'Registro Satisfactorio!',
+                'status' => 200,
                 'msg' => 'Los datos se han registrado satisfactoriamente!!!',
-            ],200);
+            ]);
        
 
     }

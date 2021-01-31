@@ -1796,7 +1796,7 @@
             })
             .catch(function (error) { 
                 console.log(error.response.statusText);
-                
+                swal(error.response.statusText, "Presione el Boton Ok!", "error").then((value)=> {});  
             });    
         }
 
