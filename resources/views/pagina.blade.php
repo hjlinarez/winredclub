@@ -1781,16 +1781,16 @@
                         usuario: usuario
                     })            
             .then(function (resp) {
-                alert(resp.status);
+                //alert(resp.status);
                 if (resp.status == 200)
                 {
                  
-                  swal("Registro Insertado", "Presione el Boton Ok!", "success").then((value)=> {$("#modalRegistrarCuenta").modal('hide');});  
+                  swal(resp.msg, "Presione el Boton Ok!", "success").then((value)=> {$("#modalRegistrarCuenta").modal('hide');});  
                 }
                 else 
                 {
                  
-                    swal("No se pudo completar el registro, verifique la informacion", "Presione el Boton Ok!", "error").then((value)=> {});  
+                    swal(resp.msg, "Presione el Boton Ok!", "error").then((value)=> {});  
                     
                 }
             })
