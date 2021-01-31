@@ -75,7 +75,7 @@ class JugadorController extends Controller
             return response()->json([
                 'status' => 'Registro Satisfactorio!',
                 'msg' => 'Los datos se han registrado satisfactoriamente!!!',
-            ],500);
+            ],200);
        
 
     }
