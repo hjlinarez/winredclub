@@ -1781,7 +1781,7 @@
                         usuario: usuario
                     })            
             .then(function (resp) {
-                
+                alert(resp.status);
                 if (resp.status == 200)
                 {
                  
@@ -1793,10 +1793,6 @@
                     swal("No se pudo completar el registro, verifique la informacion", "Presione el Boton Ok!", "error").then((value)=> {});  
                     
                 }
-
-
-                
-
             })
             .catch(function (error) {     
                 
