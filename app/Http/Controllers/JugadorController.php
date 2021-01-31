@@ -37,17 +37,7 @@ class JugadorController extends Controller
         $movil              = $request["movil"];
         $movil_wp           = $request["movil_wp"];
 
-        return '
-            <p>Nombre Completo'.$nombrecompleto.'</p>
-            <p>usuario'.$usuario.'</p>
-            <p>email'.$email.'</p>
-            <p>idmoneda'.$idmoneda.'</p>
-            <p>movil'.$movil.'</p>
-            <p>movil_wp'.$movil_wp.'</p>
-
-            ';
-
-            
+       
         //validacion de email en jugador
         $jugador = \DB::table('jugador')->where('email','=', $email)->get();
         if (count($jugador) > 0)
