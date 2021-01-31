@@ -1714,7 +1714,7 @@
   <script src="assets/js/main.js"></script>   
   <script src="assets/js/funciones.js"></script>   
   <script src="assets/js/sweetalert.min.js"></script>
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="assets/js/axios.min.js"></script>
   
 
 
@@ -1771,6 +1771,8 @@
                 return false;                              
             }
             
+
+
             axios.post('jugador',
                     {
                         nombrecompleto: nombrecompleto,
@@ -1780,23 +1782,18 @@
                         idmoneda: idmoneda,
                         usuario: usuario
                     })            
-            .then(function (resp) {
-                alert(resp.status);
-                if (resp.status == 200)
+            .then(function (resp) {                    
+                if (resp.status == 200)  
                 {
-                 
-                  swal(resp.msg, "Presione el Boton Ok!", "success").then((value)=> {$("#modalRegistrarCuenta").modal('hide');});  
+                  swal(resp.data.status, resp.data.msg, "success").then((value)=> {$("#modalRegistrarCuenta").modal('hide');});                                                
                 }
                 else 
                 {
-                 
-                    swal(resp.msg, "Presione el Boton Ok!", "error").then((value)=> {});  
-                    
+                  swal(resp.data.status, resp.data.msg, "error").then((value)=> {});
                 }
             })
-            .catch(function (error) { 
-                console.log(error.response.statusText);
-                swal(error.response.statusText, "Presione el Boton Ok!", "error").then((value)=> {});  
+            .catch(function (error) {                  
+                swal("Lo siento!", "Verifique la informacion", "error").then((value)=> {});  
             });    
         }
 
@@ -1858,9 +1855,10 @@
                     })            
             .then(function (resp) {
                 // handle success
+                
                 if (resp.status == 200)
                 {
-                  swal("Error", "Presione el Boton Ok!", "success").then((value)=> {$("#modalDeposito").modal('hide');});
+                  swal(resp.data.msg, "Presione el Boton Ok!", "success").then((value)=> {$("#modalDeposito").modal('hide');});
                 }
                 else 
                 {
@@ -1868,7 +1866,7 @@
                 }
             })
             .catch(function (error) {     
-                
+              
                 swal(error.data.msg, "Presione el Boton Ok!", "error").then((value)=> {});  
             });                        
         }

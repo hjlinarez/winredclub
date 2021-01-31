@@ -7,10 +7,81 @@ use Illuminate\Http\Request;
 class JugadorController extends Controller
 {
     //
-    function show()
+    public function index()
+    {
+
+    }
+    
+    public function show()
     {
          $datos = \DB::table('jugador')->get();
         return view('admin.jugadores')->with('datos', $datos);
+    }
+
+
+    public function store(Request $request)
+    {
+        
+        $nombrecompleto     = $request["nombrecompleto"];
+        $usuario            = $request["usuario"];
+        $email              = $request["email"];
+        $idmoneda           = $request["idmoneda"];
+        $movil              = $request["movil"];
+        $movil_wp           = $request["movil_wp"];
+    
+      
+
+
+
+        
+           
+        $jugador = \DB::table('jugador')->where('email','=', $email)->get();
+        if (count($jugador) > 0)
+        {           
+           
+            return response()->json([                
+                'status' => 'Lo siento!!!',
+                'msg' => 'Email ya se encuentra registrado.'
+            ],202);            
+        }
+                    
+        $jugador = \DB::table('jugador')->where('usuario','=', $usuario)->get();
+        if (count($jugador) > 0)
+        {            
+            
+            return response()->json([                
+                'status' => 'Lo siento!!!',
+                'msg' => 'El usuario ya se encuentra registrado.'
+            ],202);
+        }
+           
+        
+        $id = \DB::table('jugador')->insertGetId(
+            [
+                'nombrecompleto'=>$nombrecompleto,
+                'usuario'=>$usuario, 
+                'email'=>$email,
+                'movil'=>$movil,
+                'idmoneda'=>$idmoneda,
+                'movil_wp'=>$movil_wp
+            ]
+        );
+
+    
+        return response()->json([            
+            'status' => 'Muy Bien!',
+            'msg' => 'Datos registrados correctamentre.',
+        ],200);      
+        
+
+
+
+        
+        
+            
+        
+        
+
     }
 
 
@@ -27,58 +98,7 @@ class JugadorController extends Controller
 
 
  
-    public function store(Request $request)
-    {
-        
-        $nombrecompleto     = $request["nombrecompleto"];
-        $usuario            = $request["usuario"];
-        $email              = $request["email"];
-        $idmoneda           = $request["idmoneda"];
-        $movil              = $request["movil"];
-        $movil_wp           = $request["movil_wp"];
-
-       
-        //validacion de email en jugador
-        $jugador = \DB::table('jugador')->where('email','=', $email)->get();
-        if (count($jugador) > 0)
-        {
-            return response()->json([
-                'status' => 200,
-                'msg' => 'El email ya se encuentra registrado!!!',
-            ]);
-        }
-
-        //validacion de usuario en jugador
-        $jugador = \DB::table('jugador')->where('usuario','=', $usuario)->get();
-        if (count($jugador) > 0)
-        {
-            return response()->json([
-                'status' => 200,
-                'msg' => 'El usuario ya se encuentra registrado!!!',
-            ]);
-        }
-        
-           
-
-        $id = \DB::table('jugador')->insert(
-            [
-                'nombrecompleto'=>$nombrecompleto,
-                'usuario'=>$usuario, 
-                'email'=>$email,
-                'movil'=>$movil,
-                'idmoneda'=>$idmoneda,
-                'movil_wp'=>$movil_wp
-            ]
-        );
-
-      
-            return response()->json([
-                'status' => 200,
-                'msg' => 'Los datos se han registrado satisfactoriamente!!!',
-            ]);
-       
-
-    }
+    
 
         
 
