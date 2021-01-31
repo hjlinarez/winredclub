@@ -35,6 +35,7 @@ Route::get('depositos', 'DepositoController@show')->middleware('auth');
 Route::get('retiros', 'RetiroController@show')->middleware('auth');
 
 Route::post('depositosjugador', 'DepositoController@depositosjugador')->middleware('auth');
+Route::post('retirosjugador', 'RetiroController@retirosjugador')->middleware('auth');
 
 
 

@@ -113,4 +113,18 @@ class RetiroController extends Controller
 
 
     }
+
+    public function retirosjugador(Request $resquest)    
+    {
+        $idjugador = $resquest["idjugador"];
+         $datos = \DB::table('retiro')
+            ->join('jugador', 'jugador.idjugador', '=', 'retiro.idjugador')            
+            ->select('retiro.*', 'jugador.nombrecompleto')
+            ->where('retiro.idjugador','=',$idjugador)
+            ->get();
+
+        return response()->json($datos);
+        
+    }
+
 }

@@ -129,8 +129,7 @@ class DepositoController extends Controller
             ->select('deposito.*', 'jugador.nombrecompleto')
             ->where('deposito.idjugador','=',$idjugador)
             ->orderBy('deposito.id','desc')
-            ->get();
-                    
+            ->get();                    
         return response()->json($datos);
     }
 }

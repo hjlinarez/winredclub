@@ -44,6 +44,33 @@
 
 
 
+<div class="modal fade" id="modalRetiros" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Retiros</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>              
+            <div class="modal-body">
+                <table id="tabla_retiros_jugador" class="table" width="100%">
+                    <thead>
+                        <tr>
+                            <th>Fecha Hora</th>                            
+                            <th>Monto</th>
+                        </tr>
+                    </thead>
+                    <tbody>                                            
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+            </div>              
+        </div>
+    </div>    
+</div>
+
+
+
 <div class="card">        
         <div class="card-body">
             <table class="table table borderead" id="tabla-grupo">
@@ -64,7 +91,8 @@
                         <td>
                             <button class="btn btn-primary">Editar</button>                                                        
                             <button type="button" class="btn btn-primary" onclick="depositos_jugador({{ $dato->idjugador }} );">Depositos</button>
-                            <button class="btn btn-primary">Retiros</button>
+                            <button type="button" class="btn btn-primary" onclick="retiros_jugador({{ $dato->idjugador }} );">Retiros</button>
+                            
                             
 
                         </td>
@@ -113,10 +141,42 @@
                     columns: [
                         {data: 'fecha_hora'},
                         {data: 'referencia'},
-                        {data: 'monto'}
+                        {data: 'monto', render: $.fn.dataTable.render.number( '.', ',', 2 )}
                     ]
+                    
+                     
+                    
                 });
                 $('#modalDepositos').modal('show');
+            })
+            .catch(function (error) {     
+                swal("Lo siento!", "Error interno.", "error").then((value)=> {});  
+                
+            });                        
+    }
+
+
+
+    function retiros_jugador(idjugador)
+    {
+    
+        axios.post('retirosjugador',
+                    {
+                        idjugador: idjugador
+                    })            
+            .then(function (resp) {
+                
+                $('#tabla_retiros_jugador').DataTable({
+                    responsive: true,
+                    autoWidth: false,
+                    destroy: true,
+                    data : resp.data,
+                    columns: [
+                        {data: 'fecha_hora'},                        
+                        {data: 'monto', render: $.fn.dataTable.render.number( '.', ',', 2 )}
+                    ]
+                });
+                $('#modalRetiros').modal('show');
             })
             .catch(function (error) {     
                 swal("Lo siento!", "Error interno.", "error").then((value)=> {});  
