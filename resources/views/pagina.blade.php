@@ -1800,7 +1800,7 @@
             })
             .catch(function (error) {     
                 
-                
+                console.log(error);
                 swal("Error", "Presione el Boton Ok!", "error").then((value)=> {});  
             });    
         }
