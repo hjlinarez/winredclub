@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Winred.bet</title>
+  <title>Winred.club</title>
   <meta content="" name="casino live, casino en vivo, apuestas deportivas, pronosticos deportivos, slots">   
   <link href="assets/img/icono1.png" rel="icon">
   <link href="assets/img/icono1.png" rel="apple-touch-icon">  
@@ -1858,16 +1858,16 @@
                 
                 if (resp.status == 200)
                 {
-                  swal(resp.data.msg, "Presione el Boton Ok!", "success").then((value)=> {$("#modalDeposito").modal('hide');});
+                  swal(resp.data.status, resp.data.msg, "success").then((value)=> {$("#modalDeposito").modal('hide');});
                 }
                 else 
                 {
-                  swal(resp.data.msg, "Presione el Boton Ok!", "error").then((value)=> {});
+                  swal(resp.data.status, resp.data.msg, "error").then((value)=> {});
                 }
             })
             .catch(function (error) {     
               
-                swal(error.data.msg, "Presione el Boton Ok!", "error").then((value)=> {});  
+              swal("Lo siento!", "Verifique la informacion", "error").then((value)=> {});  
             });                        
         }
 
@@ -1930,7 +1930,7 @@
             })
             .catch(function (error) {     
                 
-                swal("hola", "Presione el Boton Ok!", "error");
+                swal("Error", "Presione el Boton Ok!", "error");
             });                        
         }
 

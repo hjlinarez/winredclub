@@ -118,4 +118,19 @@ class DepositoController extends Controller
 
         
     }
+
+
+
+    public function depositosjugador(Request $resquest)
+    {
+        $idjugador = $resquest["idjugador"];
+        $datos = \DB::table('deposito')
+            ->join('jugador', 'jugador.idjugador', '=', 'deposito.idjugador')            
+            ->select('deposito.*', 'jugador.nombrecompleto')
+            ->where('deposito.idjugador','=',$idjugador)
+            ->orderBy('deposito.id','desc')
+            ->get();
+                    
+        return response()->json($datos);
+    }
 }

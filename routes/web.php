@@ -30,9 +30,11 @@ Route::post('rechazardeposito', 'DepositoController@rechazar')->name('deposito.r
 Route::post('aprobarretiro', 'RetiroController@aprobar')->name('retiro.aprobar');
 Route::post('rechazarretiro', 'RetiroController@rechazar')->name('retiro.rechazar');
 
-Route::get('jugadores', 'JugadorController@show')->middleware('auth');;
-Route::get('depositos', 'DepositoController@show')->middleware('auth');;
-Route::get('retiros', 'RetiroController@show')->middleware('auth');;
+Route::get('jugadores', 'JugadorController@show')->middleware('auth');
+Route::get('depositos', 'DepositoController@show')->middleware('auth');
+Route::get('retiros', 'RetiroController@show')->middleware('auth');
+
+Route::post('depositosjugador', 'DepositoController@depositosjugador')->middleware('auth');
 
 
 
