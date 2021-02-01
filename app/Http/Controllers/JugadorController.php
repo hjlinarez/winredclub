@@ -14,7 +14,7 @@ class JugadorController extends Controller
     
     public function show()
     {
-         $datos = \DB::table('jugador')->get();
+         $datos = \DB::table('jugador')->orderBy('estatus','asc')->get();
         return view('admin.jugadores')->with('datos', $datos);
     }
 
@@ -28,10 +28,6 @@ class JugadorController extends Controller
         $idmoneda           = $request["idmoneda"];
         $movil              = $request["movil"];
         $movil_wp           = $request["movil_wp"];
-    
-      
-
-
 
         
            
@@ -94,6 +90,34 @@ class JugadorController extends Controller
         return $datos->idjugador;
 
         
+    }
+
+
+    public function registrar(Request $request)
+    {
+        $idjugador = $request["idjugador"];
+        \DB::table('jugador')
+              ->where('idjugador', $idjugador)
+              ->update(['estatus' => 'REG']);
+
+        return response()->json([
+                'status' => 'Registro Procesado!',
+                'msg' => 'Los datos se han registrado satisfactoriamente!!!',
+            ],200);
+    }
+
+
+    public function eliminar(Request $request)
+    {
+        $idjugador = $request["idjugador"];
+        \DB::table('jugador')
+              ->where('idjugador', $idjugador)
+              ->delete();
+
+        return response()->json([
+                'status' => 'Registro Procesado!',
+                'msg' => 'Los datos se han registrado satisfactoriamente!!!',
+            ],200);
     }
 
 

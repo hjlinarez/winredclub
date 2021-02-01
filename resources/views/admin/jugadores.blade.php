@@ -30,6 +30,7 @@
                             <th>Fecha Hora</th>
                             <th>Referencia</th>
                             <th>Monto</th>
+                            <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>                                            
@@ -79,22 +80,27 @@
                         <th>Nombre Completo</th>
                         <th>Email</th>
                         <th>Usuario</th>
+                        
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($datos as $dato)
-                    <tr>
+                    <tr id="idfila_{{ $dato->idjugador }}">
                         <td>{{ $dato->nombrecompleto }}</td>
                         <td>{{ $dato->email }}</td>
                         <td>{{ $dato->usuario }}</td>
-                        <td>
-                            <button class="btn btn-primary">Editar</button>                                                        
-                            <button type="button" class="btn btn-primary" onclick="depositos_jugador({{ $dato->idjugador }} );">Depositos</button>
-                            <button type="button" class="btn btn-primary" onclick="retiros_jugador({{ $dato->idjugador }} );">Retiros</button>
+                        
+                        <td id="acciones_jugador_{{ $dato->idjugador }}">
                             
-                            
-
+                            @if ($dato->estatus == 'PEN' )                                
+                                <button type="button" class="btn btn-success" onclick="registrar_jugador({{ $dato->idjugador }} );">Registrar</button>
+                                <button type="button" class="btn btn-danger" onclick="eliminar_jugador({{ $dato->idjugador }} );">Eliminar</button>
+                            @else 
+                                <button type="button" class="btn btn-primary" onclick="editar_jugador({{ $dato->idjugador }} );">Editar</button>                            
+                                <button type="button" class="btn btn-primary" onclick="depositos_jugador({{ $dato->idjugador }} );">Depositos</button>
+                                <button type="button" class="btn btn-primary" onclick="retiros_jugador({{ $dato->idjugador }} );">Retiros</button>
+                            @endif
                         </td>
                     </tr>
                     @endforeach
@@ -121,7 +127,8 @@
 <script>
     $('#tabla-grupo').DataTable({
             responsive: true,
-            autoWidth: false
+            autoWidth: false,
+            ordering:  false,
         });
 
     function depositos_jugador(idjugador)
@@ -141,12 +148,11 @@
                     columns: [
                         {data: 'fecha_hora'},
                         {data: 'referencia'},
-                        {data: 'monto', render: $.fn.dataTable.render.number( '.', ',', 2 )}
-                    ]
-                    
-                     
-                    
+                        {data: 'monto', render: $.fn.dataTable.render.number( '.', ',', 2 )},
+                        {data: 'estatus'}
+                    ]                    
                 });
+
                 $('#modalDepositos').modal('show');
             })
             .catch(function (error) {     
@@ -174,6 +180,7 @@
                     columns: [
                         {data: 'fecha_hora'},                        
                         {data: 'monto', render: $.fn.dataTable.render.number( '.', ',', 2 )}
+                       
                     ]
                 });
                 $('#modalRetiros').modal('show');
@@ -183,5 +190,81 @@
                 
             });                        
     }
+
+
+
+    function registrar_jugador(idjugador)
+    {
+
+            swal({
+                    title: "Confirma que el jugador fue registrado?",
+                    text: "",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                    })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            axios.post('registrarjugador',
+                                    {
+                                        idjugador: idjugador
+                                    })            
+                            .then(function (resp) {
+                                
+                                swal("Muy bien!", "Jugador registrado", "success").then((value)=> {
+
+                                    $("#acciones_jugador_"+idjugador).html("<button type='button' class='btn btn-primary' onclick='editar_jugador("+idjugador+");'>Editar</button><button type='button' class='btn btn-primary' onclick='depositos_jugador("+idjugador+");'>Depositos</button><button type='button' class='btn btn-primary' onclick='retiros_jugador("+idjugador+");'>Retiros</button>");
+                                    
+                                }); 
+                            })
+                            .catch(function (error) {     
+                                swal("Lo siento!", "Error interno.", "error").then((value)=> {});  
+                                
+                            });     
+                        } 
+                        });
+    }
+
+
+
+    function eliminar_jugador(idjugador)
+    {
+
+            swal({
+                    title: "Confirma eliminar este registro?",
+                    text: "",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                    })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            axios.post('eliminarjugador',
+                                    {
+                                        idjugador: idjugador
+                                    })            
+                            .then(function (resp) {
+                                $("#idfila_"+idjugador).remove();
+                                swal("Muy bien!", "Registro Eliminado", "success").then((value)=> {}); 
+                            })
+                            .catch(function (error) {     
+                                swal("Lo siento!", "Error interno.", "error").then((value)=> {});  
+                                
+                            });     
+                        } 
+                        });
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 </script>
 @stop

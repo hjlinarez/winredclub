@@ -21,6 +21,8 @@ Route::get('/', function () {
 
 
 Route::post('jugador', 'JugadorController@store')->name('jugador.store');
+Route::post('registrarjugador', 'JugadorController@registrar')->name('jugador.registrar');
+Route::post('eliminarjugador', 'JugadorController@eliminar')->name('jugador.eliminar');
 Route::post('deposito', 'DepositoController@store')->name('deposito.store');
 Route::post('retiro', 'RetiroController@store')->name('retiro.store');
 

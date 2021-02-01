@@ -110,12 +110,6 @@ class DepositoController extends Controller
             'status' => 'Ocurrio un error en el sistema!',
             'msg' => 'Verifique la informacion...',
         ],500);
-
-
-
-        
-
-
         
     }
 
@@ -129,7 +123,17 @@ class DepositoController extends Controller
             ->select('deposito.*', 'jugador.nombrecompleto')
             ->where('deposito.idjugador','=',$idjugador)
             ->orderBy('deposito.id','desc')
-            ->get();                    
-        return response()->json($datos);
+            ->get();
+        
+        $nuevos_datos = array();
+        foreach($datos as $dato)
+        {
+            if ($dato->estatus == 'APR') $dato->estatus = 'APROBADO';
+            if ($dato->estatus == 'PEN') $dato->estatus = 'PENDIENTE';
+            if ($dato->estatus == 'REC') $dato->estatus = 'RECHAZADO';
+
+            $nuevos_datos[] = $dato;
+        }
+        return response()->json($nuevos_datos);
     }
 }
