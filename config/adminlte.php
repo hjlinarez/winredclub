@@ -251,7 +251,7 @@ return [
 
         [
             'text' => 'Usuarios',
-            'url'  => 'admin/settings',
+            'url'  => 'usuarios',
             'icon' => 'fas fa-fw fa-user',
         ],
 

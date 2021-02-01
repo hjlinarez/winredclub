@@ -69,15 +69,6 @@ class JugadorController extends Controller
             'msg' => 'Datos registrados correctamentre.',
         ],200);      
         
-
-
-
-        
-        
-            
-        
-        
-
     }
 
 
@@ -91,6 +82,23 @@ class JugadorController extends Controller
 
         
     }
+
+    public function datos_jugador_id(Request $request)
+    {
+        $idjugador = $request["idjugador"];
+        $datos = \DB::table('jugador')                            
+                            ->where('idjugador','=', $idjugador)
+                            ->get();
+        
+
+        
+
+        return $datos;
+
+
+        
+    }
+
 
 
     public function registrar(Request $request)
@@ -121,6 +129,44 @@ class JugadorController extends Controller
     }
 
 
+
+
+    public function modificar(Request $request)
+    {
+        $idjugador          = $request["idjugador"];
+        $nombrecompleto     = $request["nombrecompleto"];        
+        $email              = $request["email"];        
+        $movil              = $request["movil"];
+        $movil_wp           = $request["movil_wp"];
+
+        
+           
+        $jugador = \DB::table('jugador')->where('email','=', $email)->where('idjugador','<>',$idjugador)->get();
+        if (count($jugador) > 0)
+        {                      
+            return response()->json([                
+                'status' => 'Lo siento!!!',
+                'msg' => 'Email ya se encuentra registrado.'
+            ],202);            
+        }
+
+
+        \DB::table('jugador')
+              ->where('idjugador', $idjugador)
+              ->update([
+                    'nombrecompleto' => $nombrecompleto,
+                    'email' => $email,
+                    'movil' => $movil,
+                    'movil_wp' => $movil_wp
+                ]);
+
+    
+        return response()->json([            
+            'status' => 'Muy Bien!',
+            'msg' => 'Datos registrados correctamentre.',
+        ],200);      
+        
+    }
  
     
 
