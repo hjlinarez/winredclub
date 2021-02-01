@@ -23,6 +23,15 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $db_jugador = \DB::table('jugador')->where('estatus','=','PEN')->get();
+        $db_depositos = \DB::table('deposito')->where('estatus','=','PEN')->get();
+        $db_retiros = \DB::table('retiro')->where('estatus','=','PEN')->get();
+
+
+        $jugadores = count($db_jugador);
+        $depositos = count($db_depositos);
+        $retiros = count($db_retiros);
+
+        return view('home')->with(['jugadores'=>$jugadores,'depositos'=>$depositos,'retiros'=>$retiros]);
     }
 }

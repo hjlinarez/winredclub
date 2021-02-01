@@ -142,6 +142,7 @@ class JugadorController extends Controller
         
            
         $jugador = \DB::table('jugador')->where('email','=', $email)->where('idjugador','<>',$idjugador)->get();
+        
         if (count($jugador) > 0)
         {                      
             return response()->json([                
